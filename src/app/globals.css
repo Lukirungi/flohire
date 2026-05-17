@@ -1,26 +1,158 @@
-@import "tailwindcss";
+/* ── FLOHIRE BRAND TOKENS ─────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Bricolage+Grotesque:opsz,wght@12..96,300;12..96,400;12..96,500;12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@1&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand palette */
+  --flo-orange:          #ff4500;
+  --flo-orange-2:        #ff6830;
+  --flo-orange-light:    rgba(255,69,0,.08);
+  --flo-orange-border:   rgba(255,69,0,.2);
+
+  /* Ink (dark) */
+  --flo-ink:             #0c0c0e;
+  --flo-ink-2:           #1a1a20;
+  --flo-ink-3:           #26262e;
+  --flo-ink-4:           #35353f;
+
+  /* Surfaces (light) */
+  --flo-white:           #ffffff;
+  --flo-cream:           #fdf8f5;
+  --flo-surface:         #f0efea;
+  --flo-border:          #e8e7e0;
+  --flo-border-2:        #d4d3cc;
+
+  /* Text */
+  --flo-text:            #0c0c0e;
+  --flo-text-2:          #5c5c66;
+  --flo-text-3:          #8888a0;
+  --flo-text-4:          #b8b8be;
+
+  /* Semantic */
+  --flo-green:           #16a34a;
+  --flo-green-bg:        #f0fdf4;
+  --flo-green-border:    #bbf7d0;
+  --flo-amber:           #d97706;
+  --flo-amber-bg:        #fffbeb;
+  --flo-amber-border:    #fde68a;
+  --flo-blue:            #2563eb;
+  --flo-blue-bg:         #eff6ff;
+  --flo-blue-border:     #bfdbfe;
+  --flo-red:             #dc2626;
+  --flo-red-bg:          #fef2f2;
+  --flo-red-border:      #fecaca;
+  --flo-purple:          #7c3aed;
+  --flo-purple-bg:       #f5f3ff;
+
+  /* Typography */
+  --font-display:        'Syne', sans-serif;
+  --font-body:           'Bricolage Grotesque', sans-serif;
+  --font-mono:           'DM Mono', monospace;
+  --font-serif:          'Instrument Serif', serif;
+
+  /* Radius */
+  --r-xs:   4px;   --r-sm:   6px;
+  --r-md:   10px;  --r-lg:   14px;
+  --r-xl:   18px;  --r-2xl:  24px;
+
+  /* Shadows */
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:  0 4px 16px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.04);
+  --shadow-lg:  0 16px 48px rgba(0,0,0,.12), 0 4px 16px rgba(0,0,0,.06);
+  --shadow-acc: 0 8px 32px rgba(255,69,0,.25);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* ── BASE STYLES ──────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  color: var(--flo-text);
+  background: var(--flo-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* ── BUTTON SYSTEM ────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px; border-radius: var(--r-sm);
+  font-size: 13.5px; font-weight: 700;
+  font-family: var(--font-body);
+  border: 1.5px solid transparent;
+  transition: all .16s; white-space: nowrap; cursor: pointer; line-height: 1;
+}
+.btn-primary {
+  background: var(--flo-orange); color: #fff;
+  border-color: var(--flo-orange);
+  box-shadow: 0 2px 8px rgba(255,69,0,.2);
+}
+.btn-primary:hover {
+  background: var(--flo-orange-2); border-color: var(--flo-orange-2);
+  box-shadow: var(--shadow-acc); transform: translateY(-1px);
+}
+.btn-outline {
+  background: transparent; color: var(--flo-text);
+  border-color: var(--flo-border-2);
+}
+.btn-outline:hover { border-color: var(--flo-text-3); background: var(--flo-surface); }
+.btn-ghost { background: var(--flo-surface); color: var(--flo-text); border-color: transparent; }
+.btn-ghost:hover { background: #e8e7e0; }
+.btn-dark { background: var(--flo-ink); color: #fff; border-color: var(--flo-ink); }
+.btn-dark:hover { background: var(--flo-ink-2); box-shadow: var(--shadow-md); transform: translateY(-1px); }
+.btn-sm  { padding: 6px 12px; font-size: 12px; }
+.btn-lg  { padding: 13px 26px; font-size: 15px; }
+.btn-xl  { padding: 16px 36px; font-size: 16px; border-radius: var(--r-md); }
+
+/* ── BADGE SYSTEM ─────────────────────────────────────────── */
+.badge {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 3px 9px; border-radius: 100px;
+  font-size: 11px; font-weight: 700; font-family: var(--font-body);
+}
+.badge-acc    { background: rgba(255,69,0,.1);     color: var(--flo-orange); }
+.badge-green  { background: var(--flo-green-bg);   color: var(--flo-green); }
+.badge-amber  { background: var(--flo-amber-bg);   color: var(--flo-amber); }
+.badge-blue   { background: var(--flo-blue-bg);    color: var(--flo-blue); }
+.badge-red    { background: var(--flo-red-bg);     color: var(--flo-red); }
+.badge-ink    { background: var(--flo-ink);         color: #fff; }
+.badge-neutral{ background: var(--flo-surface); color: var(--flo-text-3); border: 1px solid var(--flo-border); }
+
+/* ── CARD ─────────────────────────────────────────────────── */
+.card {
+  background: var(--flo-white);
+  border: 1.5px solid var(--flo-border);
+  border-radius: var(--r-xl); overflow: hidden;
+  transition: all .2s;
+}
+.card:hover { border-color: var(--flo-border-2); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+
+/* ── FORM INPUTS ──────────────────────────────────────────── */
+.input {
+  width: 100%; padding: 10px 14px;
+  border: 1.5px solid var(--flo-border);
+  border-radius: var(--r-sm);
+  font-size: 14px; font-family: var(--font-body);
+  color: var(--flo-text); background: var(--flo-white);
+  outline: none; transition: border-color .15s;
+}
+.input:focus { border-color: var(--flo-orange); box-shadow: 0 0 0 3px rgba(255,69,0,.08); }
+.input::placeholder { color: var(--flo-text-4); }
+
+/* ── TYPOGRAPHY ───────────────────────────────────────────── */
+.display-xl { font-family: var(--font-display); font-size: clamp(40px,6vw,72px); font-weight: 800; letter-spacing: -.05em; line-height: 1; }
+.display-lg { font-family: var(--font-display); font-size: clamp(32px,4vw,48px); font-weight: 800; letter-spacing: -.04em; line-height: 1.05; }
+.heading-xl  { font-family: var(--font-display); font-size: 28px; font-weight: 800; letter-spacing: -.03em; }
+.heading-md  { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -.02em; }
+.body-lg    { font-size: 16px; line-height: 1.75; color: var(--flo-text-2); }
+.body-md    { font-size: 14px; line-height: 1.7;  color: var(--flo-text-2); }
+.label-sm   { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.mono       { font-family: var(--font-mono); }
+
+/* ── SCROLLBAR ────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--flo-surface); }
+::-webkit-scrollbar-thumb { background: var(--flo-border-2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--flo-text-4); }
